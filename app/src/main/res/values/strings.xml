@@ -1,0 +1,9 @@
+<resources>
+	<string name="app_name">干货与妹纸</string>
+
+	<string name="title_home">主页</string>
+	<string name="title_dashboard">分类</string>
+	<string name="title_notifications">通知</string>
+	<string name="title_persion">个人</string>
+	<string name="title_activity_main">MainActivity</string>
+</resources>
