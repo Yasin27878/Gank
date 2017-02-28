@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by Yasin on 2017/2/27.
- * Email : yili270@163.com
+ * Email : yasin27878@163.com
  * Description :Activity 基类
  */
 

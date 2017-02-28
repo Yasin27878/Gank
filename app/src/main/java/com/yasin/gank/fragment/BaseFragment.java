@@ -5,7 +5,7 @@ import android.app.Fragment;
 
 /**
  * Created by Yasin on 2017/2/27.
- * Email : yili270@163.com
+ * Email : yasin27878@163.com
  * Description : Fragment 基类
  */
 
