@@ -6,7 +6,7 @@ package com.yasin.gank.base;
  * Description : Presenter公共接口
  */
 
-public interface BasePersenter {
+public interface BasePresenter {
     /**
      * 页面初始化数据
      */

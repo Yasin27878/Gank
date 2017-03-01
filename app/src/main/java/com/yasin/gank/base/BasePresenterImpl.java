@@ -8,10 +8,10 @@ import com.yasin.gank.callback.RequestCallback;
  * Description :Persenter实现类
  */
 
-public class BasePersenterImpl<T extends BaseView, V> implements BasePersenter, RequestCallback<V> {
-    protected T mView;
+public class BasePresenterImpl<T extends BaseView, V> implements BasePresenter, RequestCallback<V> {
+    public T mView;
 
-    public BasePersenterImpl(T mView) {
+    public BasePresenterImpl(T mView) {
         this.mView = mView;
         mView.setPresenter(this);
     }

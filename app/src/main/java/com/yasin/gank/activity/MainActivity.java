@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yasin.gank.R;
+import com.yasin.gank.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
