@@ -7,5 +7,5 @@ package com.yasin.gank.core;
  */
 
 public class ConstantApi {
-    public static final String BASE_URL = "";
+    public static final String BASE_URL = "http://gank.io";
 }

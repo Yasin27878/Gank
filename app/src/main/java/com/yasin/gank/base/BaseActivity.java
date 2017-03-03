@@ -6,11 +6,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.yasin.gank.R;
+import com.yasin.gank.util.SnackbarUtil;
 import com.yasin.gank.util.SystemBarTintManager;
+
+import butterknife.ButterKnife;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Yasin on 2017/2/27.
@@ -80,12 +85,12 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
 
     @Override
     public void toast(String msg) {
-
+        SnackbarUtil.showShort(this, msg);
     }
 
     @Override
     public void serverError(String msg) {
-
+        SnackbarUtil.showShort(this, msg);
     }
 
     /**
@@ -117,5 +122,52 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @return
+     * @serialData 需要在@link {super.onCreate}之前调用 否则无效
+     */
+    protected void setTranslateColor(int color) {
+        colorPrim = color == 0 ? colorPrim : color;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        hideProgress();
+        if (mPresenter != null){
+            mPresenter.onDestroy();
+        }
+        try {
+            ButterKnife.unbind(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
+    }
+
+    /**
+     * EasyPermissions 默认配置
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 }

@@ -1,4 +1,4 @@
-package com.yasin.gank.activity;
+package com.yasin.gank.mvp.main;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;

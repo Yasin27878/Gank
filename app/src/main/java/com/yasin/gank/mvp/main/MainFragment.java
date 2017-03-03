@@ -1,4 +1,6 @@
-package com.yasin.gank.fragment;
+package com.yasin.gank.mvp.main;
+
+import com.yasin.gank.base.BaseFragment;
 
 /**
  * Created by Yasin on 2017/2/27.
@@ -7,4 +9,5 @@ package com.yasin.gank.fragment;
  */
 
 public class MainFragment extends BaseFragment {
+
 }
