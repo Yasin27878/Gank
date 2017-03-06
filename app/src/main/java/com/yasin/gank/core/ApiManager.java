@@ -82,16 +82,21 @@ public class ApiManager {
      * 网络接口
      */
     public interface ApiService {
+        /**
+         *
+         * @param user
+         * @return
+         */
         @GET("api/{user}/repos")
         Observable<List<BaseEntity<String>>> listRepos(@Path("user") String user);
 
         /**
-         * 获取
+         * 获取所有干货
          *
          * @param data
          * @return
          */
         @GET("api/data/Android/{data}")
-        Observable<BaseEntity<List<Information>>> getAll(@Path("data") String data);
+        Observable<BaseEntity<List<Information>>> getAllImformation(@Path("data") String data);
     }
 }

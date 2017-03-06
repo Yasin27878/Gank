@@ -6,14 +6,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.yasin.gank.R;
+import com.yasin.gank.annotation.ActivityInject;
 import com.yasin.gank.util.SnackbarUtil;
 import com.yasin.gank.util.SystemBarTintManager;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -27,10 +30,38 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
     protected int colorPrim = R.color.colorPrimary;
     protected T mPresenter;
     protected ProgressDialog progressDialog = null;
+    @Bind(R.id.toolbar)
+    protected Toolbar toolbar;
+    /**
+     * contentView的ID
+     */
+    protected int mContentViewId;
+    /**
+     * toolbar Title
+     */
+    protected int toolbarTitle;
+    /**
+     * 菜单的布局文件ID
+     */
+    private int menuID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getClass().isAnnotationPresent(ActivityInject.class)) {
+            ActivityInject annitation = getClass().getAnnotation(ActivityInject.class);
+            mContentViewId = annitation.contentView();
+            if (annitation.toolbarTitle() != -1) {
+                toolbarTitle = annitation.toolbarTitle();
+            }
+            menuID = annitation.menuId();
+        } else {
+            throw new RuntimeException("Class must add annotations of ActivityInject.class");
+        }
+        toolbar.setTitle(toolbarTitle);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         if (isTranslate()) {
             setTranslate();
         }
@@ -56,7 +87,9 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
 
     @Override
     public void setPresenter(T presenter) {
-
+        if (presenter != null && mPresenter == null) {
+            mPresenter = presenter;
+        }
     }
 
     @Override
@@ -145,7 +178,7 @@ public class BaseActivity<T extends BasePresenter> extends AppCompatActivity imp
     @Override
     protected void onDestroy() {
         hideProgress();
-        if (mPresenter != null){
+        if (mPresenter != null) {
             mPresenter.onDestroy();
         }
         try {
